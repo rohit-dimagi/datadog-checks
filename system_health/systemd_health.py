@@ -11,7 +11,7 @@ class SystemdHealthCheck(AgentCheck):
         msg=""
         hostname = socket.gethostbyaddr(socket.gethostname())[0].split('.')[0]
         try:
-            out, err, retcode = get_subprocess_output(commnad, self.log, raise_on_empty_output=True)
+            out, err, retcode = get_subprocess_output(commnad, self.log, raise_on_empty_output=False)
             if retcode != 0:
                 msg = err
                 self.service_check('systemd_health.is_unknown', 3, tags=tags, hostname=hostname, message=msg)
